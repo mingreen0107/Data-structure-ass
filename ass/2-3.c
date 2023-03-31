@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
@@ -7,52 +8,56 @@ typedef struct student {
 	char name[100];
 	int student_number;
 	int score;
+
 } student;
 
-int get_mean(int namecount, int score) {
+int get_mean(student students[], int N) {
 
 	int sum = 0, average = 0;
 	int i;
 
-	for (i = 0; i < namecount; i++)
+	for (i = 0; i < N; i++)
 	{
-		sum += score;
+		sum += students[i].score;
 	}
-	average = sum / namecount;
+	average = sum / N;
 
 	return average;
 }
 
-int get_deviation(int namecount, int average, int score) {
+int get_deviation(student students[], int average, int N) {
 
 	double standard = 0;
 	int sum = 0;
 	int i;
 
-	for (i = 0; i < namecount; i++)
+	for (i = 0; i < N; i++)
 	{
-		sum += pow(average - score, 2);
+		sum += pow(average - students[i].score, 2);
 	}
-	standard = sqrt(sum / namecount);
+	standard = sqrt(sum / N);
 
 	return standard;
 }
 
 int main() {
 
-	student stu;
-	student sir;
+	student static students[1000];
+	int N, a, b;
+	int i;
 
-	strcpy(stu.name, "송민주");
-	stu.student_number = 20221307;
-	stu.score = 100;
+	printf("학생수를 입력하시오.\n");
+	scanf("%d", &N);
 
-	strcpy(sir.name, "최준혁");
-	sir.student_number = 20221376;
-	sir.score = 0;
+	printf("학생 이름, 학번, 점수를 입력하시오.\n");
+	for (i = 0; i < N; i++)
+	{
+		scanf("%s %d %d", students[i].name, &students[i].student_number, &students[i].score);
+	}
+	a = get_mean(students, N);
+	b = get_deviation(students, a, N);
 
-	printf("%s, %d, %d\n", stu.name, stu.student_number, stu.score);
-	printf("%s, %d, %d", sir.name, sir.student_number, sir.score);
+	printf("평균 : %d, 표준편차 : %d", a, b);
 
 	return 0;
 }
