@@ -10,7 +10,7 @@ char* pa[] = {
 };
 void error(int err_num)
 {
-	//error(1)이기 때문에 '에러 2'가 printf 됨.
+	//error(1)이기 때문에 printf == '에러 2'
 	printf(pa[err_num]);
 }
 main()
