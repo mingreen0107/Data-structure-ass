@@ -11,7 +11,8 @@ void main()
 	/*char* pc = NULL;
 	int* pi = NULL;
 	float* pf = NULL;
-	double* pd = NULL;*/
+	double* pd = NULL;
+	로 적어 줄 때 코드가 실행된다.*/
 
 	char c;
 	int i;
