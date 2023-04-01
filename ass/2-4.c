@@ -11,20 +11,20 @@ typedef struct student {
 
 } student;
 
-int get_mean(student students[], int N) {
+int get_mean(student* students, int N) {
 
 	int sum = 0, average = 0;
 	int i;
 
 	for (i = 0; i < N; i++)
 	{
-		sum += students[i].score;
+		sum += (*(students+i)).score;
 	}
 	average = sum / N;
 
 	return average;
 }
-int get_deviation(student students[], int average, int N) {
+int get_deviation(student* students, int average, int N) {
 
 	double standard = 0;
 	int sum = 0;
@@ -32,7 +32,7 @@ int get_deviation(student students[], int average, int N) {
 
 	for (i = 0; i < N; i++)
 	{
-		sum += pow(average - students[i].score, 2);
+		sum += pow(average - (*(students+i)).score, 2);
 	}
 	standard = sqrt(sum / N);
 
