@@ -11,6 +11,7 @@ typedef struct student {
 
 } student;
 
+//2-3과 달리 배열이 아닌 포인터로 받아줌
 int get_mean(student* students, int N) {
 
 	int sum = 0, average = 0;
