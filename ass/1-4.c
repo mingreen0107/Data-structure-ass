@@ -25,7 +25,7 @@ int main() {
 
     scanf("%d", &N);
 
-    //place가 void형으로 반환될 때 주소로 반한되어 주소값을 줘야한다
+    //place가 void형으로 반환될 때 주소로 반한되어 주소값을 줘야함
     search(arr, N, &place);
 
     printf("arr[%d]의 위치에 있다", place);

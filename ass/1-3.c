@@ -12,7 +12,7 @@ int main() {
 	{
 		//rand() 함수에 들어있는 값들이 크기 때문에
 		//rnad() 함수에 의해 난수를 생성하고 그 숫자를 10으로 나눈 나머지를 변수에 대입
-		random[i] = rand() % 10; 
+		random[i] = rand() % 10;
 
 		printf("%d\n", random[i]);
 	}
@@ -31,6 +31,6 @@ int main() {
 	//만약 값들을 다르게 하고 싶다면
 	//srand(time(NULL));을 사용하면 된다.
 	//이 함수는 1초 단위로 매번 다른 시드값을 생성해 rand()함수를 호출하는 함수다.
-	
+
 	return 0;
 }
