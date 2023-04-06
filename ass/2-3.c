@@ -3,6 +3,8 @@
 #include <string.h>
 #include <math.h>
 
+//받는 값이 정수가 아닐수도 있으므로 다른 연산자를 사용해본다.
+
 typedef struct student {
 
 	char name[100];
@@ -11,9 +13,10 @@ typedef struct student {
 
 } student;
 
-int get_mean(student students[], int N) {
+double get_mean(student students[], int N) {
 
-	int sum = 0, average = 0;
+	int sum = 0;
+	double average = 0;
 	int i;
 
 	for (i = 0; i < N; i++)
@@ -24,7 +27,7 @@ int get_mean(student students[], int N) {
 
 	return average;
 }
-int get_deviation(student students[], int average, int N) {
+double get_deviation(student students[], double average, int N) {
 
 	double standard = 0;
 	int sum = 0;
@@ -41,7 +44,8 @@ int get_deviation(student students[], int average, int N) {
 int main() {
 
 	student static students[1000];
-	int N, a, b;
+	int N;
+	double a, b;
 	int i;
 
 	printf("학생수를 입력하시오.\n");
@@ -55,7 +59,7 @@ int main() {
 	a = get_mean(students, N);
 	b = get_deviation(students, a, N);
 
-	printf("평균 : %d, 표준편차 : %d", a, b);
+	printf("평균 : %.2f, 표준편차 : %.2f", a, b);
 
 	return 0;
 }

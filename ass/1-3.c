@@ -14,7 +14,7 @@ int main() {
 		printf("%d\n", random[i]);
 	}
 	for (i = 0; i < 10; i++)
-	{
+	{//왜 같은 값이 나오는지 다른값을 위해선 어떻게 해야 하는지
 		if (min > random[i])
 			min = random[i];
 

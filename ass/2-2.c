@@ -12,7 +12,7 @@ typedef struct student {
 
 int main() {
 
-	student static students[1000];
+	student students[1000] = {0};
 	int N;
 	int i;
 
@@ -22,7 +22,7 @@ int main() {
 	printf("학생 이름, 학번, 점수를 입력하시오.\n");
 	for (i = 0; i < N; i++)
 	{
-		scanf("%s %d %d\n", students[i].name, &students[i].student_number, &students[i].score);
+		scanf("%s %d %d", students[i].name, &students[i].student_number, &students[i].score);
 	}
 	return 0;
 }

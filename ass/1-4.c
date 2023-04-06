@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 void search(int arr[], int N, int* place) {
-
+    //main에서 출력을 해야 하기 때문에 *로 줘야함
     int i;
 
     for (i = 0; i < 10; i++)
@@ -16,7 +16,7 @@ void search(int arr[], int N, int* place) {
            return;
         }
     }
-}ㅣ
+}
 int main() {
 
     int arr[10] = { 23, 45, 12, 34, 65, 25, 89, 61, 26, 11 };
