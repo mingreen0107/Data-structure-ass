@@ -3,7 +3,7 @@
 void swap1(int i, int j);
 
 void swap2(int* i, int* j);
-//
+
 void main()
 {
 	int num1, num2;
@@ -16,7 +16,7 @@ void main()
 	swap2(&num1, &num2);
 	printf("num1 : %d num2 : %d\n", num1, num2);
 }
-//
+
 void swap1(int i, int j)
 {
 	int temp;
@@ -25,7 +25,7 @@ void swap1(int i, int j)
 	i = j;
 	j = temp;
 }
-//
+
 void swap2(int* i, int* j)
 {
 	int temp;
