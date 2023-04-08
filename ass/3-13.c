@@ -25,9 +25,9 @@ void main()
 	for (i = 0; i < 800; i++)
 		*pd = 800;
 
-	printf("c = %d\n", *pc);
-	printf("c = %d\n", *pi);
-	printf("c = %d\n", *pf);
-	printf("c = %d\n", *pd);
+	printf("c = %lu\n", *pc);
+	printf("c = %lu\n", *pi);
+	printf("c = %lu\n", *pf);
+	printf("c = %lu\n", *pd);
 	// 실습 코드 완료
 }
