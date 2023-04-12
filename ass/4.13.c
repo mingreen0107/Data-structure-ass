@@ -1,16 +1,5 @@
 #include <stdio.h>
 
-void insert_first_C(Node** p2head, Node* new) {
-	if (*p2head == NULL) { // 빈 원형 연결리스트에 삽입
-		*p2head = new;
-		new->link = new;
-	}
-	else { // 맨 앞에 삽입
-		new->link = (*p2head)->link;
-		(*p2head)->link = new;
-	}
-}
-
 void insert_last_C(Node** p2head, Node* new) {
 	if (*p2head == NULL) { // 빈 원형 연결리스트에 삽입
 		*p2head = new;
