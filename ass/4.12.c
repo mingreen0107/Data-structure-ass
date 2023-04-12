@@ -10,7 +10,6 @@ void insert_first_C(Node** p2head, Node* new) {
 		(*p2head)->link = new;
 	}
 }
-
 int main() {
 
 
