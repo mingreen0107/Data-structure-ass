@@ -7,24 +7,21 @@ typedef struct Node {
 	struct Node* link;
 } Node;
 
-void insert_node(Node** p2head, Node* before, Node* new) {
+Node *delete_node(Node** p2head, Node* before, Node* deleted) {
 	if (*p2head == NULL) {
-		new->link = NULL;
-		*p2head = new;
-	}
-	else if (before == NULL) {
-		new->link = *p2head;
-		*p2head = new;
+		if (before == NULL)
+			*p2head = (*p2head)->link;
+		else before->link = deleted->link;
+		return deleted;
 	}
 	else {
-		new->link = before->link;
-		before->link = new;
+		printf("빈 연결리스트입니다.\n");
+		return NULL;
 	}
 }
-
 int main() {
 
-	Node* head, * before, * new;
+	Node* head, * before, * deleted;
 
 	head = (Node*)malloc(sizeof(Node));
 	if (!head) exit(1);
@@ -36,16 +33,16 @@ int main() {
 	before->data = 20;
 	before->link = NULL;
 
-	new = (Node*)malloc(sizeof(Node));
-	if (!new) exit(1);
-	new->data = 15;
-	new->link = NULL;
+	deleted = (Node*)malloc(sizeof(Node));
+	if (!deleted) exit(1);
+	deleted->data = 15;
+	deleted->link = NULL;
 
-	insert_node(&head, before, new);
+	insert_node(&head, before, deleted);
 
 	printf("%d %d %d", head->data, head->link->data, head->link->link->data);
 
 	free(head);
 	free(before);
-	free(new);
+	free(deleted);
 }
