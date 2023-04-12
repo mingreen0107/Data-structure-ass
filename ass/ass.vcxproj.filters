@@ -132,5 +132,8 @@
     <ClCompile Include="4.9.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="4.8p.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
