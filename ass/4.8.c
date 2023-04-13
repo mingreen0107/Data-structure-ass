@@ -8,7 +8,7 @@ typedef struct Node {
 } Node;
 
 Node *delete_node(Node** p2head, Node* before, Node* deleted) {
-	if (*p2head == NULL) {
+	if (*p2head != NULL) {
 		if (before == NULL)
 			*p2head = (*p2head)->link;
 		else
@@ -22,7 +22,7 @@ Node *delete_node(Node** p2head, Node* before, Node* deleted) {
 }
 int main() {
 
-	Node* head, * before, * deleted;
+	Node* head, * before, * deleted, *p;
 
 	head = (Node*)malloc(sizeof(Node));
 	if (!head) exit(1);
@@ -37,14 +37,21 @@ int main() {
 
 	deleted = (Node*)malloc(sizeof(Node));
 	if (!deleted) exit(1);
-	deleted->data = NULL;
+	deleted->data = 30;
 	deleted->link = NULL;
+	before->link = deleted;
 
-	insert_node(&head, before, deleted);
+	delete_node(&head, before, deleted);
 
-	printf("%d %d", head->data, head->link->data);
+	p = head;
 
+	while (p)
+	{
+		printf("%d ", p->data);
+		p = p->link;
+	}
 	free(head);
 	free(before);
 	free(deleted);
+	free(p);
 }

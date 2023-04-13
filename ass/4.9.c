@@ -7,42 +7,59 @@ typedef struct Node {
 	struct Node* link;
 } Node;
 
-Node* concatenate_lists(Node* p2head, Node* before, Node* deleted) {
-	if (*p2head == NULL) {
-		if (before == NULL)
-			*p2head = (*p2head)->link;
-		else before->link = deleted->link;
-		return deleted;
-	}
+Node* concatenate_lists(Node* head1, Node* head2) {
+	Node* last;
+
+	if (head1 == NULL)
+		return head2;
+	else if (head2 == NULL)
+		return head1;
 	else {
-		printf("빈 연결리스트입니다.\n");
-		return NULL;
+		last = head1;
+		while (last->link)
+			last = last->link;
+		last->link = head2;
+		return head1;
 	}
 }
 int main() {
 
-	Node* head, * before, * deleted;
+	Node* head1, * head2, *data1, *data2, *p;
 
-	head = (Node*)malloc(sizeof(Node));
-	if (!head) exit(1);
-	head->data = 10;
-	head->link = NULL;
+	head1 = (Node*)malloc(sizeof(Node));
+	if (!head1) exit(1);
+	head1->data = 10;
+	head1->link = NULL;
 
-	before = (Node*)malloc(sizeof(Node));
-	if (!before) exit(1);
-	before->data = 20;
-	before->link = NULL;
+	data1 = (Node*)malloc(sizeof(Node));
+	if (!data1) exit(1);
+	data1->data = 10;
+	data1->link = NULL;
+	head1->link = data1;
 
-	deleted = (Node*)malloc(sizeof(Node));
-	if (!deleted) exit(1);
-	deleted->data = 15;
-	deleted->link = NULL;
+	head2 = (Node*)malloc(sizeof(Node));
+	if (!head2) exit(1);
+	head2->data = 20;
+	head2->link = NULL;
 
-	insert_node(&head, before, deleted);
+	data2 = (Node*)malloc(sizeof(Node));
+	if (!data2) exit(1);
+	data2->data = 10;
+	data2->link = NULL;
+	head2->link = data2;
 
-	printf("%d %d %d", head->data, head->link->data, head->link->link->data);
+	concatenate_lists(&head1, &head2);
 
-	free(head);
-	free(before);
-	free(deleted);
+	p = head1;
+
+	while (p)
+	{
+		printf("%d ", p->data);
+		p = p->link;
+	}
+	free(head1);
+	free(head2);
+	free(data1);
+	free(data2);
+	free(p);
 }

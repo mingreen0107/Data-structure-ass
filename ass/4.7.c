@@ -17,17 +17,13 @@ void insert_node(Node** p2head, Node* before, Node* new) {
 		*p2head = new;
 	}
 	else {
-		new->link = before;
-		(*p2head)->link=new;
-
-		/*new->link = before->link;
-		before->link = new;*/
+		new->link = before->link;
+		before->link = new;
 	}
 }
-
 int main() {
 
-	Node* head, * before, * new;
+	Node* head, * before, * new, *p;
 
 	head = (Node*)malloc(sizeof(Node));
 	if (!head) exit(1);
@@ -42,14 +38,21 @@ int main() {
 
 	new = (Node*)malloc(sizeof(Node));
 	if (!new) exit(1);
-	new->data = 15;
+	new->data = 30;
 	new->link = NULL;
 
 	insert_node(&head, before, new);
 
-	printf("%d %d %d", head->data, head->link->data, head->link->link->data);
-
+	//printf("%d %d %d", head->data, head->link->data, head->link->link->data);
+	p = head;
+	
+	while (p)
+	{
+		printf("%d ", p->data);
+		p = p->link;
+	}
 	free(head);
 	free(before);
 	free(new);
+	free(p);
 }
