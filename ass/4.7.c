@@ -8,6 +8,7 @@ typedef struct Node {
 } Node;
 
 void insert_node(Node** p2head, Node* before, Node* new) {
+
 	if (*p2head == NULL) {
 		new->link = NULL;
 		*p2head = new;

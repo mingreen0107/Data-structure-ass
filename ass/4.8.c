@@ -8,6 +8,7 @@ typedef struct Node {
 } Node;
 
 Node *delete_node(Node** p2head, Node* before, Node* deleted) {
+
 	if (*p2head != NULL) {
 		if (before == NULL)
 			*p2head = (*p2head)->link;
