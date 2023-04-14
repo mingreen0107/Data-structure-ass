@@ -33,22 +33,22 @@ int main() {
 
 	data1 = (Node*)malloc(sizeof(Node));
 	if (!data1) exit(1);
-	data1->data = 10;
+	data1->data = 20;
 	data1->link = NULL;
 	head1->link = data1;
 
 	head2 = (Node*)malloc(sizeof(Node));
 	if (!head2) exit(1);
-	head2->data = 20;
+	head2->data = 30;
 	head2->link = NULL;
 
 	data2 = (Node*)malloc(sizeof(Node));
 	if (!data2) exit(1);
-	data2->data = 10;
+	data2->data = 40;
 	data2->link = NULL;
 	head2->link = data2;
 
-	concatenate_lists(&head1, &head2);
+	concatenate_lists(head1, head2);
 
 	p = head1;
 
