@@ -23,6 +23,7 @@ int main() {
 	head->link = temp;
 
 	printf("head-->%d-->%d\n", head->data, head->link->data);
+
 	free(temp);
 	free(head);
 }
