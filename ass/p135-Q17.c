@@ -7,10 +7,9 @@ typedef struct Node { // 이름과 관련있는 노드 생성
 	struct Node* next;
 } Node;
 
-typedef struct Node { // 이어주는 노드 생성
-	char name[10];
-	struct Node* next;
-} Node;
+typedef struct List { // 이어주는 노드 생성
+	struct List* next;
+} List;
 
 //Node* ConnectNode(Node* name, N)
 
