@@ -27,7 +27,7 @@ Node* newNode(char* inputName) { // 이름을 저장하는 노드 생성
 void setList(List* list) {
 	list->count = 0;
 }
-void insert_node(Node** p2head, Node* new) {
+void insert_node(Node** p2head, Node* new) { // 이어줌
 
 	if (*p2head == NULL) {
 		new->data = NULL;
@@ -36,6 +36,16 @@ void insert_node(Node** p2head, Node* new) {
 	else {
 		new->next = (*p2head)->next;
 		(*p2head)->data = new;
+	}
+}
+Node* delete_node(Node** p2head, Node* before, Node* deleted) { // 삭제
+
+	if (*p2head != NULL) {
+		if (before == NULL)
+			*p2head = (*p2head)->data;
+		else
+			before->data = deleted->data;
+		return deleted;
 	}
 }
 void connectNode(Node* p, List* list) {
@@ -51,8 +61,6 @@ void connectNode(Node* p, List* list) {
 	}
 	list->count++;
 }
-
-
 int main() {
 
 	Node* p;
@@ -74,7 +82,6 @@ int main() {
 			connectNode(p, list);
 			}
 		}
-		
 	while (p)
 	{
 		printf("%s", p);
