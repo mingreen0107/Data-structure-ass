@@ -25,8 +25,6 @@ Node* newNode(char* inputName) { // 이름을 저장하는 노드 생성
 	return inputname;
 }
 void setList(List* list) {
-	list->head = newNode(" ");
-	list->tail = newNode(" ");
 	list->count = 0;
 }
 void insert_node(Node** p2head, Node* new) {
