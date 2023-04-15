@@ -8,6 +8,7 @@ typedef struct Node {
 } Node;
 
 Node* concatenate_lists(Node* head1, Node* head2) {
+
 	Node* last;
 
 	if (head1 == NULL)

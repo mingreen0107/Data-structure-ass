@@ -1,20 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define DataType int
 
 typedef struct Node {
-	DataType data;
+	struct Node* back;
+	int data;
 	struct Node* link;
 } Node;
 
-Node* delete_node(Node** p2head, Node* middle, Node* before, Node* deleted) {
-	if (*p2head == NULL) {
+Node* delete_node(Node** p2head, Node* before, Node* deleted) {
+
+	if (*p2head != NULL) {
 		if (before == NULL)
-			middle->data = NULL;
-		else {
-			deleted->link = before;
-			(*p2head)->link = deleted;
-		}
+			*p2head = (*p2head)->link;
+		else
+			before->link = deleted->link;
 		return deleted;
 	}
 	else {
@@ -24,35 +23,38 @@ Node* delete_node(Node** p2head, Node* middle, Node* before, Node* deleted) {
 }
 int main() {
 
-	Node* head, * before, * deleted, * middle;
+	Node* head, * before, * deleted, * p;
 
 	head = (Node*)malloc(sizeof(Node));
 	if (!head) exit(1);
+	head->back = NULL;
 	head->data = 10;
 	head->link = NULL;
 
-	middle = (Node*)malloc(sizeof(Node));
-	if (!before) exit(1);
-	middle->data = 20;
-	middle->link = NULL;
-	head->link = middle;
-
 	before = (Node*)malloc(sizeof(Node));
 	if (!before) exit(1);
-	before->data = 30;
+	head->link = before->back;
+	before->data = 20;
 	before->link = NULL;
-	middle->link = before;
+	before->back = before->data;
 
 	deleted = (Node*)malloc(sizeof(Node));
 	if (!deleted) exit(1);
-	deleted->data = NULL;
+	deleted->data = 30;
 	deleted->link = NULL;
+	before->link = deleted;
 
-	insert_node(&head, middle, before, deleted);
+	delete_node(&head, before, deleted);
 
-	printf("%d %d", head->data, head->link->data);
+	p = head;
 
+	while (p)
+	{
+		printf("%d ", p->data);
+		p = p->link;
+	}
 	free(head);
 	free(before);
 	free(deleted);
+	free(p);
 }
