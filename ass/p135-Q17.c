@@ -1,60 +1,58 @@
-<#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #define DataType int
 
-	typedef struct Node {
+typedef struct Node {
 	DataType data;
 	struct Node* link;
 } Node;
 
+void insert_node(Node** p2head, Node* before, Node* new) {
+
+	if (*p2head == NULL) {
+		new->link = NULL;
+		*p2head = new;
+	}
+	else if (before == NULL) {
+		new->link = *p2head;
+		*p2head = new;
+	}
+	else {
+		new->link = before->link;
+		before->link = new;
+	}
+}
 int main() {
 
-	Node* stu1, * stu2, * stu3, * stu4;
-	int n;
+	Node* head, * before, * new, * p;
 
-	stu1 = (Node*)malloc(sizeof(Node));
-	if (!stu1)
-		exit(1);
-	stu1->data = 's';
-	stu1->link = NULL;
+	head = (Node*)malloc(sizeof(Node));
+	if (!head) exit(1);
+	head->data = 10;
+	head->link = NULL;
 
-	stu2 = (Node*)malloc(sizeof(Node));
-	if (!stu2)
-		exit(1);
-	stu2->data = 'm';
-	stu2->link = NULL;
-	stu1->link = stu2;
+	before = (Node*)malloc(sizeof(Node));
+	if (!before) exit(1);
+	before->data = 20;
+	before->link = NULL;
+	head->link = before;
 
-	stu3 = (Node*)malloc(sizeof(Node));
-	if (!stu3)
-		exit(1);
-	stu3->data = 'j';
-	stu3->link = NULL;
-	stu2->link = stu3;
+	new = (Node*)malloc(sizeof(Node));
+	if (!new) exit(1);
+	new->data = 30;
+	new->link = NULL;
 
-	stu4 = (Node*)malloc(sizeof(Node));
-	if (!stu4)
-		exit(1);
-	stu4->data = 'b';
-	stu4->link = NULL;
-	stu3->link = stu4;
+	insert_node(&head, before, new);
 
-	printf("%c - %c - %c - %c\n", stu1->data, stu1->link->data,
-		stu1->link->link->data, stu1->link->link->link->data);
+	p = head;
 
-	scanf("%d", &n);
-
-	if (n == 1)
-		printf("%c - %c", stu1->link->link->data, stu1->link->link->link->data);
-	else if (n == 2)
-		printf("%c - %c", stu1->data, stu1->link->link->link->data);
-	else if (n == 3)
-		printf("%c - %c", stu1->link->data, stu1->link->link->link->data);
-	else
-		printf("%c - %c", stu1->data, stu1->link->link->data);
-
-	free(stu1);
-	free(stu2);
-	free(stu3);
-	free(stu4);
-} >
+	while (p)
+	{
+		printf("%d ", p->data);
+		p = p->link;
+	}
+	free(head);
+	free(before);
+	free(new);
+	free(p);
+}
