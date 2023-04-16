@@ -82,9 +82,4 @@ int main() {
 			connectNode(p, list);
 			}
 		}
-	while (p)
-	{
-		printf("%s", p);
-		p = p->next;
-	}
 }
