@@ -76,7 +76,7 @@ int main() {
 		if (inputName[0] == '0')
 			break;
 		else {
-			p = newNode(inputName);
+			p = connet(&inputName);
 		} // 여기 어딘가에 이어주는 노드를 써야할 것 같옹
 	}
 	printf("\n총 학생수를 입력하시오. (대표학생의 종이뽑기)\n");
