@@ -30,29 +30,33 @@ Node* create_node(DataType data) {
 	return new;
 }
 
-void init_list(LinkedB0_C* B0) {
+void init_list(LinkedB0_C* B0) { // 초기화겟쇼
 	B0->length = 0;
 	B0->tail = NULL;
 }
 
 void print_list(LinkedB0_C* B0) {
-	Node* ptr = B0->tail;
+	Node* ptr = B0->tail; // Movie의 정보를 넘겨줌
+	int j = 1;
 	for (int i = 1; i <= B0->length; i++) {
-		ptr = ptr->link;
-		printf("제목=%s, 개봉연도=%d, 관객수=%d\n",
-			ptr->data.title, ptr->data.release, ptr->data.viewers);
+		ptr = ptr->link; // 얘도 초기화겠져
+		printf("%d) 제목=%s, 개봉연도=%d, 관객수=%d\n",
+			j, ptr->data.title, ptr->data.release, ptr->data.viewers);
+		j++;
 	}
 }
 
 void insert_node_last(LinkedB0_C* B0, Node* new) {
-	B0->length++;
-	if (B0->tail == NULL) {
+	B0->length++; // 뭔데 지우면 안 돌아갈까?
+	/* ---> 아 밑에서 외국영화와 한국영화를 비교 해 주면서
+	하나씩 카운트 줄여나가며 printf가 돼서 그렇구낭~*/
+	if (B0->tail == NULL) { // 빈 연결리스트
 		B0->tail = new;
 		new->link = new;
 	}
-	else {
+	else { // 마지막 삽입
 		new->link = B0->tail->link;
-		B0->tail->link = new;
+		B0->tail->link = new; // 뭔데 지우면 명량만 출력될끼?
 		B0->tail = new;
 	}
 }
@@ -63,8 +67,8 @@ LinkedB0_C merge_B0(LinkedB0_C* a, LinkedB0_C* b) {
 	int num_a = a->length, num_b = b->length;
 
 	init_list(&c);
-	if (p2a) p2a = p2a->link;
-	if (p2b) p2b = p2b->link;
+	if (p2a) p2a = p2a->link; // 뭔데 지우면 중구난방이 되지?
+	if (p2b) p2b = p2b->link; 
 
 	while (num_a != 0 && num_b != 0) {
 		if (p2a->data.viewers >= p2b->data.viewers) {
