@@ -144,5 +144,11 @@
     <ClCompile Include="p135-Q17re3.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="p135-Q17re4.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="4.14.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
