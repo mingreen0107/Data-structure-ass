@@ -54,12 +54,31 @@ void push_back(int value) {
     newnode->rlink = p;
 }
 
+//삭제하는 함수
+void removenode(int value) {
+    struct NODE* p;
+    p = head->rlink;
+    while (p->rlink != tail) {
+        if (p->data == value) {
+            p->rlink->llink = p->llink;
+            p->llink->rlink = p->rlink;
+            free(p);
+            return;
+        }
+        p = p->rlink;
+    }
+}
+
 //main함수
 int main() {
     init(); //head와 tail 초기화 (data = 0)
+    printf("----before remove----\n\n");
     push_back(10); //10 추가
     push_back(30); //30 추가
     push_back(50); //50 추가
     print();  //출력
+    printf("\n\n----after remove----\n\n");
+    removenode(30);
+    print();
     return 0;
 }
