@@ -4,8 +4,8 @@
 #include <time.h>
 
 typedef struct Node { // 이름과 관련있는 노드 생성
-	char name[10];
 	struct Node* data;
+	char name[10];
 	struct Node* next;
 } Node;
 
