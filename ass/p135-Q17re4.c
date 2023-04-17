@@ -14,11 +14,11 @@ Node* head;
 Node* tail;
 
 // 이름을 저장하는 노드 생성
-Node* newNode(char* inputName) { 
+Node* newNode(char *inputName) {
 	Node* inputname;
 
 	inputname = (Node*)malloc(sizeof(Node));
-	inputname->prev = NULL;
+	inputname = (char*)malloc(strlen(inputName) + 1);
 	strcpy(inputname->name, inputName); // 노드에 이름을 넣어주깅
 	inputname->next = NULL;
 
@@ -28,8 +28,8 @@ Node* newNode(char* inputName) {
 void init() {
 	head = (Node*)malloc(sizeof(Node));
 	tail = (Node*)malloc(sizeof(Node));
-	head->name = ' ';
-	tail->name = ' ';
+	head->name = 'NULL'; // 초기화 하는 법이 뭘까?
+	tail->name = 'NULL'; // 만약 초기화를 해야한다면 prev랑 next는 왜 초기화를 안 해도 될까?
 
 	// head와 tail이 서로를 가르키도록 하는 과정
 	head->next = tail; 
@@ -54,6 +54,7 @@ int randset(int n) {
 	return randpick;
 }
 // 함수 시작 위치와 뽑은 수로 재배치
+// 이게 지금 매우 이상함 머야
 Node* relocation_node(Node** head, int picknum) { 
 	Node* relocation = head;
 	int i = 1;
@@ -65,43 +66,36 @@ Node* relocation_node(Node** head, int picknum) {
 		return &relocation;
 	}
 }
-// 제거 될 위치에 있는 학생을 pickstu에 저장하는 함수
-Node* remove_node(Node** p2head, int picknum) {
-	Node* p, * q;
+// 제거 될 위치에 있는 학생을 출력하는 함수
+Node* remove_node(int picknum) {
+	Node* p;
 	char pickstu[10];
 	int i = 0;
 	
 	p = head->next;
-	while (i == picknum+1) {
-		p = p->next;
-		i++;
-	}
-	strcpy(pickstu, p->name);
 
+	while (p->next != tail) {
+		if (i == picknum + 1) {
+			strcpy(pickstu, p->name);
+			break;
+		}
+	}
 	printf("제거 된 학생 : %s", pickstu);
 }
 // 남은 학생들을 출력하는 함수
-Node* remain_node(Node** p2head, int picknum) {
-	Node* p, * q;
-	int i = 0;
-
-	p = head->next;
-	// 제거하는 함수
-	q = head->next;
-	while (q->next != tail) {
-		if (q->prev == p->prev) {
-			q->next->prev = q->prev;
-			q->prev->next = p->next;
-			free(q);
-			return;
-		}
-		q = q->next;
+Node* remain_node(Node** p2head) {
+	Node* p;
+	p = head;
+	
+	while (p->next != tail) {
+		printf("%s ", p->name);
+		p = p->next;
 	}
-	return &q;
+	printf("%s", p->name);
 }
 int main() {
 
-	Node* p, * relocation, * remain, * pickstu;
+	Node* p, * relocation;
 	char inputName[10];
 	int sumstu, rand, n;
 
@@ -133,14 +127,9 @@ int main() {
 	scanf("%d", &n);
 
 	// 제거 된 학생의 이름 출력하는 함수
-	pickstu = remove_node(&head, rand);
-	printf("제거 된 학생 : %s", pickstu);
+	remove_node(rand);
 
 	// 남은 학생을 출력하는 함수
-	printf("\n남은 학생 이름\n");
-	remain = remain_node(&head, n);
-	while (remain) {
-		printf("%s ", remain);
-		remain = remain->next;
-	}
+	printf("\n남은 학생 이름 : ");
+	remain_node(&head);
 }
