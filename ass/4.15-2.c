@@ -46,7 +46,7 @@ void init() {
 //뒤로부터 노드 추가하는 함수
 void push_back(int value) {
     NODE* newnode = makenode(value);
-    NODE* p; 
+    NODE* p;
     p = tail;
     p->llink->rlink = newnode;
     newnode->llink = p->llink;

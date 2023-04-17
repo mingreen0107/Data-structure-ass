@@ -47,16 +47,14 @@ void print_list(LinkedB0_C* B0) {
 }
 
 void insert_node_last(LinkedB0_C* B0, Node* new) {
-	B0->length++; // 뭔데 지우면 안 돌아갈까?
-	/* ---> 아 밑에서 외국영화와 한국영화를 비교 해 주면서
-	하나씩 카운트 줄여나가며 printf가 돼서 그렇구낭~*/
+	B0->length++; 
 	if (B0->tail == NULL) { // 빈 연결리스트
 		B0->tail = new;
 		new->link = new;
 	}
 	else { // 마지막 삽입
 		new->link = B0->tail->link;
-		B0->tail->link = new; // 뭔데 지우면 명량만 출력될끼?
+		B0->tail->link = new; 
 		B0->tail = new;
 	}
 }

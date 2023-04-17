@@ -28,8 +28,8 @@ Node* newNode(char *inputName) {
 void init() {
 	head = (Node*)malloc(sizeof(Node));
 	tail = (Node*)malloc(sizeof(Node));
-	head->name = 'NULL'; // 초기화 하는 법이 뭘까?
-	tail->name = 'NULL'; // 만약 초기화를 해야한다면 prev랑 next는 왜 초기화를 안 해도 될까?
+	*head->name = 'NULL'; // 초기화 하는 법이 이게 마za?
+	*tail->name = 'NULL'; // prev랑 next는 왜 초기화를 안 해도 될까?
 
 	// head와 tail이 서로를 가르키도록 하는 과정
 	head->next = tail; 
@@ -42,6 +42,7 @@ void connect_node(Node* new) {
 	Node* connect = newNode(new);
 	Node* p;
 	p = tail;
+
 	p->prev->next = connect;
 	connect->prev = p->prev;
 	p->prev = connect;
@@ -54,17 +55,25 @@ int randset(int n) {
 	return randpick;
 }
 // 함수 시작 위치와 뽑은 수로 재배치
-// 이게 지금 매우 이상함 머야
-Node* relocation_node(Node** head, int picknum) { 
-	Node* relocation = head;
+// 이게 뽑은자리 전의 데이터는 가져올 수 없음
+Node* relocation_node(Node** p2head, int picknum) {
+	Node* relocation;
+	Node* p = head; // 이렇게 주는 것이 맞나?
 	int i = 1;
 
 	if (i == picknum) {
-		relocation->next = (*head)->next;
-		relocation->prev = (*head)->prev;
-
-		return &relocation;
+		relocation->prev = p;
 	}
+	else {
+		i++;
+		p = p->next;
+	}
+	printf("재배치 후 학생들의 자리 :\n");
+	while (relocation->next != tail) {
+		printf("%s ", relocation->name);
+		relocation = relocation->next;
+	}
+	printf("%s", relocation->name);
 }
 // 제거 될 위치에 있는 학생을 출력하는 함수
 Node* remove_node(int picknum) {
@@ -72,15 +81,24 @@ Node* remove_node(int picknum) {
 	char pickstu[10];
 	int i = 0;
 	
-	p = head->next;
-
+	p = head;
 	while (p->next != tail) {
 		if (i == picknum + 1) {
 			strcpy(pickstu, p->name);
 			break;
 		}
+		else {
+			i++;
+			p = p->next;
+		}
 	}
-	printf("제거 된 학생 : %s", pickstu);
+	if (p->next == tail) {
+		printf("최종 남은 학생 : %s", ?); // 값을 어떻게 넘겨줘야하지?
+	}
+	else {
+		printf("제거 된 학생 : %s", pickstu);
+	}
+	free(p);
 }
 // 남은 학생들을 출력하는 함수
 Node* remain_node(Node** p2head) {
@@ -92,6 +110,7 @@ Node* remain_node(Node** p2head) {
 		p = p->next;
 	}
 	printf("%s", p->name);
+	free(p);
 }
 int main() {
 
@@ -132,4 +151,7 @@ int main() {
 	// 남은 학생을 출력하는 함수
 	printf("\n남은 학생 이름 : ");
 	remain_node(&head);
+
+	free(p);
+	free(relocation);
 }
