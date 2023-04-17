@@ -1,4 +1,4 @@
-// 이중연결로 풀어보기
+// 이중연결리스트로 풀어보기
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,8 +10,8 @@ typedef struct Node {
 	char name[10];
 	struct Node* next;
 } Node;
-Node* head;
-Node* tail;
+struct Node* head;
+struct Node* tail;
 
 // 이름을 저장하는 노드 생성
 Node* newNode(char* inputName) { 
@@ -24,22 +24,11 @@ Node* newNode(char* inputName) {
 
 	return inputname;
 }
-// 출력 함수
-void print() { 
-	struct Node* p;
-	p = head;
-
-	while (p->next != tail) {
-		printf("%s-->", p->name);
-		p = p->next;
-	}
-	printf("%s", p->name);
-}
 void init() {
 	head = (Node*)malloc(sizeof(Node));
 	tail = (Node*)malloc(sizeof(Node));
-	head->name = NULL; // 초기화 하는 법은?
-	tail->name = NULL;
+	head->data = NULL; 
+	tail->data = NULL;
 
 	head->next = tail;
 	head->data = head;

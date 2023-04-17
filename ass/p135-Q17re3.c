@@ -1,3 +1,4 @@
+// 단일연결리스트로 풀어보기
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
