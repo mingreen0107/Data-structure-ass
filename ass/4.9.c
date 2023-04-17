@@ -1,3 +1,4 @@
+// 단일연결 이어주는 문제
 #include <stdio.h>
 #include <stdlib.h>
 #define DataType int

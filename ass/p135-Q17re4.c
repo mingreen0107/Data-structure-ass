@@ -6,43 +6,45 @@
 
 // 이름과 관련있는 노드 생성
 typedef struct Node { 
-	struct Node* data;
+	struct Node* prev;
 	char name[10];
 	struct Node* next;
 } Node;
-struct Node* head;
-struct Node* tail;
+Node* head;
+Node* tail;
 
 // 이름을 저장하는 노드 생성
 Node* newNode(char* inputName) { 
-
 	Node* inputname;
 
 	inputname = (Node*)malloc(sizeof(Node));
+	inputname->prev = NULL;
 	strcpy(inputname->name, inputName); // 노드에 이름을 넣어주깅
 	inputname->next = NULL;
 
 	return inputname;
 }
+// 초기화 하는 함수
 void init() {
 	head = (Node*)malloc(sizeof(Node));
 	tail = (Node*)malloc(sizeof(Node));
-	head->data = NULL; 
-	tail->data = NULL;
+	head->name = ' ';
+	tail->name = ' ';
 
-	head->next = tail;
-	head->data = head;
+	// head와 tail이 서로를 가르키도록 하는 과정
+	head->next = tail; 
+	head->prev = head;
 	tail->next = tail;
-	tail->data = head;
+	tail->prev = head;
 }
 // 이어주는 노드
-Node* connect_node(Node* new) { 
+void connect_node(Node* new) { 
 	Node* connect = newNode(new);
 	Node* p;
 	p = tail;
-	p->data->next = connect;
-	connect->data = p->data;
-	p->data = connect;
+	p->prev->next = connect;
+	connect->prev = p->prev;
+	p->prev = connect;
 	connect->next = p;
 }
 // 대표학생의 종이뽑기
@@ -58,7 +60,7 @@ Node* relocation_node(Node** head, int picknum) {
 
 	if (i == picknum) {
 		relocation->next = (*head)->next;
-		relocation->data = (*head)->data;
+		relocation->prev = (*head)->prev;
 
 		return &relocation;
 	}
@@ -76,7 +78,7 @@ Node* remove_node(Node** p2head, int picknum) {
 	}
 	strcpy(pickstu, p->name);
 
-	return pickstu;
+	printf("제거 된 학생 : %s", pickstu);
 }
 // 남은 학생들을 출력하는 함수
 Node* remain_node(Node** p2head, int picknum) {
@@ -87,9 +89,9 @@ Node* remain_node(Node** p2head, int picknum) {
 	// 제거하는 함수
 	q = head->next;
 	while (q->next != tail) {
-		if (q->data == p->data) {
-			q->next->data = q->data;
-			q->data->next = p->next;
+		if (q->prev == p->prev) {
+			q->next->prev = q->prev;
+			q->prev->next = p->next;
 			free(q);
 			return;
 		}
@@ -111,7 +113,7 @@ int main() {
 		if (inputName[0] == '0')
 			break;
 		else {
-			p = connet(&inputName);
+			p = newNode(inputName);
 			connect_node(p);
 		}
 	}
