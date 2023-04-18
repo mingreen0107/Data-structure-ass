@@ -1,18 +1,18 @@
-// 이중연결리스트로 풀어보기
+// 알려준 코드를 토대로 다시 짜보기
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 
 // 이름과 관련있는 노드 생성
-typedef struct Node { 
+typedef struct Node {
 	struct Node* prev;
 	char name[10];
 	struct Node* next;
 } Node;
 
 // 이름을 저장하는 노드 생성
-Node* newNode(char *inputName) {
+Node* newNode(char* inputName) {
 	Node* inputname = (Node*)malloc(sizeof(Node));
 	strcpy(inputname->name, inputName); // 노드에 이름을 넣어주깅
 	inputname->next = NULL;
@@ -28,7 +28,7 @@ void init(Node* head, Node* tail) {
 	tail->prev = head;
 }
 // 이어주는 노드
-void connect_node(Node* tail, Node* new) { 
+void connect_node(Node* tail, Node* new) {
 	Node* connect = new;
 
 	tail->prev->next = connect;
@@ -37,7 +37,7 @@ void connect_node(Node* tail, Node* new) {
 	connect->next = tail;
 }
 // 대표학생의 종이뽑기
-int randset(int n) { 
+int randset(int n) {
 	int randpick = rand() % n + 1;
 
 	return randpick;
@@ -68,7 +68,7 @@ Node* remove_node(Node* head, Node* tail, int picknum) {
 	Node* p;
 	char pickstu[10];
 	int i = 0;
-	
+
 	p = head;
 	while (p->next != tail) {
 		if (i == picknum + 1) {
