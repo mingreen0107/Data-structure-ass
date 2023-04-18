@@ -11,144 +11,145 @@ typedef struct Node {
 	struct Node* next;
 } Node;
 
-// 이름을 저장하는 노드 생성
-Node* newNode(char* inputName) {
-	Node* inputname = (Node*)malloc(sizeof(Node));
-	strcpy(inputname->name, inputName); // 노드에 이름을 넣어주깅
-	inputname->next = NULL;
+Node* new_node() {
+	Node* new = (Node*)malloc(sizeof(Node));
+	new->next = NULL;
+	new->prev = NULL;
 
-	return inputname;
+	return new;
 }
 void init(Node* head, Node* tail) {
 	// head와 tail이 서로를 가르키도록 하는 과정
 	head->next = tail;
-	head->prev = tail;
 	tail->next = head;
+	head->prev = tail;
 	tail->prev = head;
 }
 // 이어주는 노드
-Node* connect_node(Node* start, Node* newNode, char* inputName) {
+Node* connect_node(Node* start, char* inputName) {
 	Node* new = (Node*)malloc(sizeof(Node));
 
-	start->next = new;
 	new->prev = start;
+	start->next = new;
 	strcpy(new->name, inputName);
 
 	return new;
 }
 // 대표학생의 종이뽑기
-int randset(int n) {
-	int randpick = rand() % n + 1;
+int randset(int count) {
+	int randnum = rand() % count + 1;
 
-	return randpick;
+	return randnum;
 }
 // head와 tail 제외하는 함수
 Node* remove_head_and_tail(Node* head, Node* tail) {
-	Node* cycle;
+	Node* only_data;
 
 	head->next->prev = tail->prev;
 	tail->prev->next = head->next;
-	cycle = head->next;
+	only_data = head->next;
 
-	return cycle;
+	return only_data;
 }
 // 뽑힌 사람을 기준으로 새로운 노드 생성
-Node* relocation_node(Node* cycle, int picknum, int count) {
-	Node* relocation = cycle;
+Node* relocation_node(Node* only_data, int rand, int count) {
+	Node* relocation = only_data;
+	int i;
+
+	for (i = 1; i < rand; i++) {
+		relocation = relocation->next;
+	}
+	return relocation;
+}
+// 제거 학생의 위치 제거하는 함수
+void delete_node(Node* relocation) {
+	relocation->next->prev = relocation->prev;
+	relocation->prev->next = relocation->next;
+	free(relocation);
+}
+// 시계 방향으로 제거하는 함수
+Node* r_remove_node(Node* relocation, int picknum, int count) {
+	Node* recycle;
 	int i;
 
 	for (i = 0; i < picknum; i++) {
 		relocation = relocation->next;
 	}
-	printf("뽑힌 학생 : %", relocation->name);
-
-	return relocation;
-}
-// 제거 학생의 위치 제거하는 함수
-void delete_node(Node* cycle) {
-	cycle->next->prev = cycle->prev;
-	cycle->prev->next = cycle->next;
-	free(cycle);
-}
-// 시계 방향으로 제거하는 함수
-Node* r_remove_node(Node* cycle, int picknum, int count) {
-	Node* recycle;
-	int i;
-
-	for (i = 1; i < picknum; i++) {
-		cycle = cycle->next;
-	}
-	printf("제거 된 사람 : %s", cycle->name);
-	recycle = cycle->next;
-	delete_node(cycle);
+	printf("제거 된 사람 : %s", relocation->name);
+	recycle = relocation->next;
+	delete_node(relocation);
 	printf("\n남은 학생 :");
 	for (i = 0; i < count - 1; i++) {
 		printf("%s-->", recycle->name);
 		recycle = recycle->next;
 	}
-	printf("\n\n");
+	printf("\n");
 
 	return recycle;
 }
 // 반시계 방향으로 제거하는 함수
-Node* l_remove_node(Node* cycle, int picknum, int count) {
+Node* l_remove_node(Node* relocation, int picknum, int count) {
 	Node* recycle;
 	int i;
 
-	for (i = 1; i < picknum; i++) {
-		cycle = cycle->prev;
+	for (i = 0; i < picknum; i++) {
+		relocation = relocation->prev;
 	}
-	printf("제거 된 사람 : %s\n", cycle->name);
-	recycle = cycle->prev;
-	delete_node(cycle);
+	printf("제거 된 사람 : %s\n", relocation->name);
+	recycle = relocation->prev;
+	delete_node(relocation);
 	printf("\n남은 학생 :");
 	for (i = 0; i < count - 1; i++) {
 		printf("%s-->", recycle->name);
 		recycle = recycle->next;
 	}
-	printf("\n\n");
+	printf("\n");
 
 	return recycle;
 }
 int main() {
-
-	Node* p, * relocation, * start;
+	Node* start, * only_data, * relocation;
 	char inputName[10];
-	int sumstu, rand, n, count = 0;
-	Node* head = (Node*)malloc(sizeof(Node));
-	Node* tail = (Node*)malloc(sizeof(Node));
-	head->next = head->prev = NULL;
-	tail->next = tail->prev = NULL;
+	int rand, picknum, count = 0;
+	Node* head = new_node();
+	Node* tail = new_node();
 
 	init(head, tail);
+	start = head;
 
 	printf("학생의 이름을 입력하시오. (0을 입력하면 종료)\n");
 	while (1) {
-
 		scanf("%s", inputName);
 
 		if (inputName[0] == '0')
 			break;
-		else {
-			start = head;
-			p = newNode(inputName);
-			start = connect_node(start, p, inputName);
-		}
+		else
+			start = connect_node(start, tail, inputName);
 		count++;
 	}
+	start->prev = tail;
+	tail->next = start;
+	printf("\n");
+
+	only_data = remove_head_and_tail(head, tail);
+	free(head);
+	free(tail);
+
 	rand = randset(count);
-	printf("-> %d번 자리부터 재배치", rand);
+	printf("반장이 숫자 뽑음\n-> %d번 자리부터 재배치", rand);
+	relocation = relocation_node(only_data, rand, count);
 
 	printf("\n\n제거될 자리를 입력하시오.\n");
-	scanf("%d", &n);
-
-	// 제거 된 학생의 이름 출력하는 함수
-	remove_node();
-
-	// 남은 학생을 출력하는 함수
-	printf("\n남은 학생 이름 : ");
-	remain_node(head, tail);
-
-	free(p);
+	scanf("%d", &picknum);
+	
+	while (count != 1) {
+		relocation = r_remove_node(relocation, picknum, count);
+		count--;
+		if (count == 1) break;
+		relocation = l_remove_node(relocation, picknum, count);
+		count--;
+	}
+	printf("최종 남은 학생 : %s", relocation->name);
 	free(relocation);
+	return 0;
 }
