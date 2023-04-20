@@ -10,7 +10,7 @@ int main() {
 
 	Movie m1 = { "명량", 2014, 0 };
 	Movie m2 = m1;
-	if (!strcmp(m1.title, m2.title) && m1.release == m2.release && m1.viewers == m2.viewers) printf("같은 영화");
+	if (!strcmp(m1.title, m2.title) && m1.release == m2.release && m1.viewers == m2.viewers) printf("같은 영화입니다요");
 }
 
 
