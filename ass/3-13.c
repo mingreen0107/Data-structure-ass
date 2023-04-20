@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <memory.h>
+#include <stdlib.h>
 
 void main()
 {
@@ -17,17 +18,17 @@ void main()
 
 	// 동적 메모리 공간 실습 코드를 넣으시오.
 	for (i = 0; i < 100; i++)
-		*pc = 100;
+		*pc = 10;
 	for (i = 0; i < 400; i++)
-		*pi = 400;
+		*pi = 20;
 	for (i = 0; i < 400; i++)
-		*pf = 400;
+		*pf = 40.0;
 	for (i = 0; i < 800; i++)
-		*pd = 800;
+		*pd = 80.0;
 
-	printf("c = %lu\n", *pc);
-	printf("c = %lu\n", *pi);
-	printf("c = %lu\n", *pf);
-	printf("c = %lu\n", *pd);
+	printf("pc = %d\n", *pc);
+	printf("pi = %d\n", *pi);
+	printf("pf = %f\n", *pf);
+	printf("pd = %f\n", *pd);
 	// 실습 코드 완료
 }
