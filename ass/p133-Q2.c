@@ -1,3 +1,4 @@
+// 경고 왜 뜸
 #include <stdio.h>
 #include <stdlib.h>
 #define DataType int
@@ -7,23 +8,17 @@ typedef struct Node {
 	struct Node* link;
 } Node;
 
-Node *delete_node(Node** p2head, Node* before, Node* deleted) {
+Node* delete_node(Node** p2head, Node* deleted) {
+	if ((*p2head)->link == deleted) 
+		(*p2head)->link = deleted->link;
+	else
+		*p2head = (*p2head)->link;
 
-	if (*p2head != NULL) {
-		if (before == NULL)
-			*p2head = (*p2head)->link;
-		else
-			before->link = deleted->link;
-		return deleted;
-	}
-	else {
-		printf("빈 연결리스트입니다.\n");
-		return NULL;
-	}
+	return deleted;
 }
 int main() {
 
-	Node* head, * before, * deleted, *p;
+	Node* head, * before, * deleted, * p;
 
 	head = (Node*)malloc(sizeof(Node));
 	if (!head) exit(1);
@@ -49,11 +44,11 @@ int main() {
 		printf("%d ", p->data);
 		p = p->link;
 	}
-
-	p = head;
+	
 	printf("\n\n");
 	printf("제거 후\n");
-	delete_node(&head, before, deleted);
+	delete_node(&head, deleted);
+	p = head;
 	while (p)
 	{
 		printf("%d ", p->data);
