@@ -1,4 +1,3 @@
-// 매우매우 이상
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -7,20 +6,17 @@ typedef struct Node {
 	struct Node* link;
 } Node;
 
-Node* deleted_odd(Node** head1) {
-	int num = 1;
+int sum_data(Node* name, int sum) {
+	int sumsum = name->data + sum;
 
-	for (num = 1; num <= 4; num++) {
-		if (num % 2 != 0) {
-			*head1 = (*head1)->link;
-		}
-	}
-	return (*head1);
+	return sumsum;
 }
 
 int main() {
 
-	Node* head1, * head2, * head3, * head4, * p;
+	Node* head1, * head2, * head3, * head4;
+	int sum = 0;
+	int i;
 
 	head1 = (Node*)malloc(sizeof(Node));
 	if (!head1) exit(1);
@@ -45,28 +41,10 @@ int main() {
 	head4->link = NULL;
 	head3->link = head4;
 
-	p = head1;
-	printf("제거 전\n");
-	while (p)
-	{
-		printf("%d ", p->data);
-		p = p->link;
-	}
+	sum = sum_data(head1, sum);
+	sum = sum_data(head2, sum);
+	sum = sum_data(head3, sum);
+	sum = sum_data(head4, sum);
 
-	printf("\n\n");
-	printf("제거 후\n");
-	deleted_odd(&head1);
-	p = head1;
-	while (p)
-	{
-		printf("%d ", p->data);
-		p = p->link;
-	}
-	free(head1);
-	free(head2);
-	free(head3);
-	free(head4);
-	free(p);
-
-	return 0;
+	printf("단순 연결리스트 모든 테이터 값의 합 : %d", sum);
 }
