@@ -1,32 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int print_sum_list(int sum, int i) {
-	
+float average(float sum, float scorenum) {
+	float aver = sum / scorenum;
+	return aver;
 }
 
-int average(int sum, int subjectnum) {
+void print_sum(int i, int sum) {
+	printf("학생%d의 총점 : %d", i, sum);
+}
 
+void print_average(int i, float aver) {
+	printf("\t학생%d의 평균 : %.1f", i, aver);
 }
 
 int main() {
-	int** subject;
-	int* score;
-	int subjectnum, sum = 0;
+	int** save_score;
+	int scorenum, stunum, sum, score;
+	float aver;
 	int i, j;
 
-	printf("과목수를 입력하시오:\n");
+	printf("학생수 입력 : ");
+	scanf("%d", &stunum);
+	printf("과목수 입력 : ");
+	scanf("%d", &scorenum);
+	printf("\n");
 
-	scanf("%d", &subjectnum);
-	subject = (int**)malloc(sizeof(int*) * subjectnum);
-	for (i = 0; i < subjectnum; i++) {
-		for (j = 1; j <= 5; j++) {
-			subject[j] = (int*)malloc(sizeof(int) * 5);
-			printf("%d번째 점수를 입력하시오:\n", j);
-			scanf("%d", score[j]);
-			sum += score[j];
-			print_sum_list(sum, i)
+	save_score = (int**)malloc(sizeof(int*) * stunum);
+	for (i = 1; i <= stunum; i++) {
+		printf("[학생%d의 성적]\n", i);
+
+		sum = 0;
+
+		for (j = 1; j <= scorenum; j++) {
+			save_score[j] = (int*)malloc(sizeof(int) * scorenum);
+			printf("과목%d 점수 입력 : ", j);
+			scanf("%d", save_score[j]);
+
+			sum += *save_score[j];
 		}
+		print_sum(i, sum);
+
+		aver = average(sum, scorenum);
+		print_average(i, aver);
+
+		printf("\n\n");
 	}
-	
 }		
