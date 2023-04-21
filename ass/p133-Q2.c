@@ -8,13 +8,16 @@ typedef struct Node {
 	struct Node* link;
 } Node;
 
-Node* delete_node(Node** p2head, Node* deleted) {
-	if ((*p2head)->link == deleted) 
-		(*p2head)->link = deleted->link;
-	else
-		*p2head = (*p2head)->link;
-
-	return deleted;
+Node* delete_node(Node** p2head, Node* delete) {
+	 do {
+		 if ((*p2head)->link == delete) {
+			 (*p2head)->link = delete->link;
+			 delete->data = NULL;
+		 }
+		else
+			*p2head = (*p2head)->link;
+	 } while ((*p2head)->link != NULL);
+	return *p2head;
 }
 int main() {
 
@@ -44,11 +47,10 @@ int main() {
 		printf("%d ", p->data);
 		p = p->link;
 	}
-	
+	p = head;
 	printf("\n\n");
 	printf("Á¦°Å ÈÄ\n");
-	delete_node(&head, deleted);
-	p = head;
+	p = delete_node(&head, deleted);
 	while (p)
 	{
 		printf("%d ", p->data);
