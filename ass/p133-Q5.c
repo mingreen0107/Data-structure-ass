@@ -24,7 +24,6 @@ Node* insert_node(Node** A, Node** B) {
 			j++;
 			i = 0;
 			if (j == 6) break;
-
 		}
 	} while (1);
 
