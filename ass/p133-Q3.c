@@ -1,4 +1,4 @@
-// 매우매우 이상
+// 0이 아닌 삭제라..
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -7,45 +7,51 @@ typedef struct Node {
 	struct Node* link;
 } Node;
 
-Node* deleted_odd(Node** head1) {
-	int num = 1;
+Node* delete_node(Node* a) {
+	Node* p = (Node*)malloc(sizeof(Node));
+	int i = 1;
 
-	for (num = 1; num <= 4; num++) {
-		if (num % 2 != 0) {
-			*head1 = (*head1)->link;
+	p = a;
+	while (i < 5) {
+		if (i % 2 != 0) { // 홀수번째 노드일 때
+			p->data = NULL;
+			p = p->link;
+			i++;
+		}
+		else { // 짝수일 때는 단순이동
+			p = p->link;
+			i++;
 		}
 	}
-	return (*head1);
+	return a;
 }
 
 int main() {
 
-	Node* head1, * head2, * head3, * head4, * p;
+	Node* a, * b, * c, * d, * p;
+	int i;
 
-	head1 = (Node*)malloc(sizeof(Node));
-	if (!head1) exit(1);
-	head1->data = 10;
-	head1->link = NULL;
+	a = (Node*)malloc(sizeof(Node));
+	a->data = 1;
+	a->link = NULL;
 
-	head2 = (Node*)malloc(sizeof(Node));
-	if (!head2) exit(1);
-	head2->data = 20;
-	head2->link = NULL;
-	head1->link = head2;
+	b = (Node*)malloc(sizeof(Node));
+	b->data = 2;
+	b->link = NULL;
+	a->link = b;
 
-	head3 = (Node*)malloc(sizeof(Node));
-	if (!head3) exit(1);
-	head3->data = 30;
-	head3->link = NULL;
-	head2->link = head3;
+	c = (Node*)malloc(sizeof(Node));
+	c->data = 3;
+	c->link = NULL;
+	b->link = c;
 
-	head4 = (Node*)malloc(sizeof(Node));
-	if (!head4) exit(1);
-	head4->data = 40;
-	head4->link = NULL;
-	head3->link = head4;
+	d = (Node*)malloc(sizeof(Node));
+	d->data = 4;
+	d->link = NULL;
+	c->link = d;
 
-	p = head1;
+	p = (Node*)malloc(sizeof(Node));
+	p = a;
 	printf("제거 전\n");
 	while (p)
 	{
@@ -55,17 +61,12 @@ int main() {
 
 	printf("\n\n");
 	printf("제거 후\n");
-	deleted_odd(&head1);
-	p = head1;
+	p = delete_node(a);
 	while (p)
 	{
 		printf("%d ", p->data);
 		p = p->link;
 	}
-	free(head1);
-	free(head2);
-	free(head3);
-	free(head4);
 	free(p);
 
 	return 0;
