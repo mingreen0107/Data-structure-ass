@@ -1,3 +1,4 @@
+// 행렬 곱
 #include <stdio.h>
 
 int main() {
@@ -14,7 +15,6 @@ int main() {
         }
     }
 
-    // 결과 출력
     for (i = 0; i < 3; i++) {
         for (j = 0; j < 3; j++) {
             printf("%d ", C[i][j]);

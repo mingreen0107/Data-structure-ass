@@ -1,30 +1,35 @@
-// 이게 왜 안돼
+// C에 합병하는 문제
 #include <stdio.h>
 #include <stdlib.h>
 
 typedef struct Node {
-	char data;
+	char *data;
 	struct Node* link;
 	int i;
 } Node;
 
 Node* insert_node(Node** A, Node** B) {
-	char C[6] = { 0 };
-	int j = 0;
-	while ((*B)->i < 0) {
-		if ((*A)->i >= (*B)->i) {
+	char C[6] = { 0, };
+	int j = 0,i=0;
+	do { 
+		if (i == 0) {
 			C[j] = (*A)->data;
 			*A = (*A)->link;
 			j++;
+			i = 1;
 		}
 		else {
-			C[j] == (*B)->data;
+			C[j] = (*B)->data;
 			*B = (*B)->link;
 			j++;
+			i = 0;
+			if (j == 6) break;
+
 		}
-	}
+	} while (1);
+
 	for (j = 0; j < 6; j++)
-		printf("%c", C[j]);
+		printf("%c ", C[j]);
 }
 
 int main() {
