@@ -65,7 +65,7 @@ LinkedB0_C merge_B0(LinkedB0_C* a, LinkedB0_C* b) {
 	int num_a = a->length, num_b = b->length;
 
 	init_list(&c);
-	if (p2a) p2a = p2a->link; // 뭔데 지우면 중구난방이 되지?
+	if (p2a) p2a = p2a->link; 
 	if (p2b) p2b = p2b->link; 
 
 	while (num_a != 0 && num_b != 0) {

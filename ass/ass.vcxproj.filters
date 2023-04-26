@@ -201,5 +201,11 @@
     <ClCompile Include="p134-Q13.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="4.4.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="p37-Q9.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
