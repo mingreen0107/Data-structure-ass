@@ -1,3 +1,4 @@
+// 포인터를 이용하여 문자열을 역순으로 만드는 프로그램
 #include <stdio.h>
 #include <string.h>
 
