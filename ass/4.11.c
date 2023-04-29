@@ -9,10 +9,10 @@ int count_nodes_C(Node* head) {
 	int count = 0;
 	Node* ptr = head;
 	if (head) {
-		do {
+		while (ptr != head) {
 			count++;
 			ptr = ptr->link;
-		} while (ptr != head);
+		}
 	}
 	return count;
 }
