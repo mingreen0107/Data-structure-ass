@@ -8,6 +8,7 @@ typedef struct Node {
 int count_nodes_C(Node* head) {
 	int count = 0;
 	Node* ptr = head;
+	
 	if (head) {
 		while (ptr != head) {
 			count++;
@@ -16,7 +17,6 @@ int count_nodes_C(Node* head) {
 	}
 	return count;
 }
-
 int main() {
 
 	Node* head = (Node*)malloc(sizeof(Node));
