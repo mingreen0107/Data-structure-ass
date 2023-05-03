@@ -16,7 +16,6 @@ int count_nodes_C(Node* head) {
 	}
 	return count;
 }
-
 int main() {
 
 	Node* head = (Node*)malloc(sizeof(Node));
