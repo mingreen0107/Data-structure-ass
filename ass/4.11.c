@@ -8,6 +8,7 @@ typedef struct Node {
 int count_nodes_C(Node* head) {
 	int count = 0;
 	Node* ptr = head;
+	
 	if (head) {
 		while (ptr != head) {
 			count++;
