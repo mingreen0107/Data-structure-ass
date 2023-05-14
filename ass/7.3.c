@@ -76,6 +76,6 @@ char* translate_infix_to_postfix(char infix[]) {
 	return postfix;
 }
 int main() {
-	char* postfix = translate_infix_to_postfix("5*(2+9/3)%4");
+	char* postfix = translate_infix_to_postfix("(1+2)*4+5/(6+1*4)+3");
 	printf("after = %s", postfix);
 }
