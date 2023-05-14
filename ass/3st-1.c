@@ -39,9 +39,9 @@ int palindrome(char in_str[]) {
 		if (ch == ' ' || ch == top) continue;
 		ch = tolower(ch); // ch를 소문자로 변경
 		chs = peek(&s); // 스택에서 문자를 꺼낸다
-		if (ch != chs) return FALSE; // 실패
+		if (ch != chs) return 0; // 실패
 	}
-	return TRUE; // 성공
+	return 1; // 성공
 }
 
 int main()
