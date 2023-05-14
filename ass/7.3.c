@@ -1,41 +1,54 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 
-typedef struct ArraytStack {
+typedef struct ArrayStack {
 	int top;
-	int stack[100];
+	char stack[100];
 } ArrayStack;
-// 스택 초기화
+
 void init_stack(ArrayStack* AS) {
 	AS->top = -1;
 }
-// 항목 출력
+
 void print_stack(ArrayStack* AS) {
 	printf("top->");
 	for (int i = AS->top; i >= 0; i--)
-		printf("%d", AS->stack[i]);
+		printf("%c", AS->stack[i]);
 	printf("\n");
 }
-void is_stack_full(ArrayStack* AS) {
+
+int is_stack_full(ArrayStack* AS) {
 	return AS->top == 99;
 }
-void is_stack_empty(ArrayStack* AS) {
+
+int is_stack_empty(ArrayStack* AS) {
 	return AS->top == -1;
 }
-void push(ArrayStack* AS, int data) {
-	return AS->stack[++AS->top] = data;
+
+void push(ArrayStack* AS, char data) {
+	AS->stack[++AS->top] = data;
 }
-int pop(ArrayStack* AS) {
+
+char pop(ArrayStack* AS) {
 	return AS->stack[AS->top--];
 }
-int peek(ArrayStack* AS) {
+
+char peek(ArrayStack* AS) {
 	return AS->stack[AS->top];
 }
+
 int out_prec(char op) {
+	if (op == '+' || op == '-') return 1;
+	if (op == '*' || op == '/' || op == '%') return 2;
+	if (op == '(') return 3;
+}
+int in_prec(char op) {
 	if (op == '(') return 0;
 	if (op == '+' || op == '-') return 1;
 	if (op == '*' || op == '/' || op == '%') return 2;
 }
+
 char* translate_infix_to_postfix(char infix[]) {
 	char token, op;
 	int length = strlen(infix);
@@ -63,6 +76,6 @@ char* translate_infix_to_postfix(char infix[]) {
 	return postfix;
 }
 int main() {
-	char* postfix = translate_infix_to_postfix("1+(2-3*4)/5");
+	char* postfix = translate_infix_to_postfix("5*(2+9/3)%4");
 	printf("after = %s", postfix);
 }
