@@ -17,6 +17,12 @@ void print_stack(ArrayStack* AS) {
 		printf("%d", AS->stack[i]);
 	printf("\n");
 }
+int is_stack_full(ArrayStack* AS) {
+	return AS->top == 99;
+}
+int is_stack_empty(ArrayStack* AS) {
+	return AS->top == -1;
+}
 void push(ArrayStack* AS, int data) {
 	return AS->stack[++AS->top] = data;
 }
